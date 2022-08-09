@@ -84,15 +84,15 @@ def create_columns(df, sci_types):
     return df 
 
 #Visualize distribution of training and testing data
-def visuals(vals, name):
+def visuals(vals, path_output, name):
     # summarize distribution
     counter = Counter(vals.values)
     # plot the distribution
-    plt.bar(counter.keys(), counter.values(), color = ['brown', 'pink', 'purple'])
-    plt.savefig(name)
+    plt.bar(counter.keys(), counter.values(), color = ['blue', 'gray'])
+    plt.savefig(f"{path_output}{name}.png")
     plt.clf()
 
-def data_dist(df, columns):
+def data_dist(df, columns, name):
     dict = {}
     index = []
     yes = []
@@ -104,13 +104,14 @@ def data_dist(df, columns):
     dict["Yes"] = yes
     dict["No"] = no
     df_bar = pd.DataFrame(dict, index)
-    df_bar.plot(kind = 'bar', color=['brown', 'pink'])
+    df_bar.plot(kind = 'bar', color=['blue', 'gray'])
     plt.xticks(rotation='vertical')
     plt.xlabel('Science Types')
     plt.ylabel('Counts')
     plt.title('Data Distribution')
     fig = plt.gcf()
-    fig.savefig('data_dist.png')
+    fig.savefig(f'{name}/data_dist.png')
+    plt.clf()
 
 def tuning(x, y):
     #List Hyperparameters that we want to tune.

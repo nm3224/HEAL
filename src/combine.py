@@ -7,15 +7,15 @@ import ast
 
 def get_args():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--science_preds_ML", default="/Users/mayatnf/HEAL/science_preds_ML.xlsx", help="path for where excel for where science type predictions are saved", type=str)
-    parser.add_argument("--outcome_preds_ML", default="/Users/mayatnf/HEAL/outcome_preds_ML.xlsx", help="path for where excel for where outcome type predictions are saved", type=str)
-    parser.add_argument("--milestone_preds_ML", default="/Users/mayatnf/HEAL/milestone_preds_ML.xlsx", help="path for where excel for where milestone type predictions are saved", type=str)
-    parser.add_argument("--science_preds_NLP", default="/Users/mayatnf/HEAL/science_preds_NLP.xlsx", help="path for where excel for where science type predictions are saved", type=str)
-    parser.add_argument("--outcome_preds_NLP", default="/Users/mayatnf/HEAL/outcome_preds_NLP.xlsx", help="path for where excel for where outcome type predictions are saved", type=str)
-    parser.add_argument("--milestone_preds_NLP", default="/Users/mayatnf/HEAL/milestone_preds_NLP.xlsx", help="path for where excel for where milestone type predictions are saved", type=str)
-    parser.add_argument("--science_preds_final", default="/Users/mayatnf/HEAL/science_preds_final.xlsx", help="path for where excel for where science type predictions are saved", type=str)
-    parser.add_argument("--outcome_preds_final", default="/Users/mayatnf/HEAL/outcome_preds_final.xlsx", help="path for where excel for where outcome type predictions are saved", type=str)
-    parser.add_argument("--milestone_preds_final", default="/Users/mayatnf/HEAL/milestone_preds_final.xlsx", help="path for where excel for where milestone type predictions are saved", type=str)
+    parser.add_argument("--science_preds_ML", default="/Users/mayatnf/HEAL/results/predictions_ML/science_preds_ML.xlsx", help="path for where excel for where science type predictions are saved", type=str)
+    parser.add_argument("--outcome_preds_ML", default="/Users/mayatnf/HEAL/results/predictions_ML/outcome_preds_ML.xlsx", help="path for where excel for where outcome type predictions are saved", type=str)
+    parser.add_argument("--milestone_preds_ML", default="/Users/mayatnf/HEAL/results/predictions_ML/milestone_preds_ML.xlsx", help="path for where excel for where milestone type predictions are saved", type=str)
+    parser.add_argument("--science_preds_NLP", default="/Users/mayatnf/HEAL/results/predictions_NLP/science_preds_NLP.xlsx", help="path for where excel for where science type predictions are saved", type=str)
+    parser.add_argument("--outcome_preds_NLP", default="/Users/mayatnf/HEAL/results/predictions_NLP/outcome_preds_NLP.xlsx", help="path for where excel for where outcome type predictions are saved", type=str)
+    parser.add_argument("--milestone_preds_NLP", default="/Users/mayatnf/HEAL/results/predictions_NLP/milestone_preds_NLP.xlsx", help="path for where excel for where milestone type predictions are saved", type=str)
+    parser.add_argument("--science_preds_final", default="/Users/mayatnf/HEAL/results/preds_final/science_preds_final.xlsx", help="path for where excel for where science type predictions are saved", type=str)
+    parser.add_argument("--outcome_preds_final", default="/Users/mayatnf/HEAL/results/preds_final/outcome_preds_final.xlsx", help="path for where excel for where outcome type predictions are saved", type=str)
+    parser.add_argument("--milestone_preds_final", default="/Users/mayatnf/HEAL/results/preds_final/milestone_preds_final.xlsx", help="path for where excel for where milestone type predictions are saved", type=str)
     
     args = parser.parse_args()
     return args

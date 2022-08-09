@@ -14,15 +14,14 @@ warnings.filterwarnings("ignore")
 #Create arguments to access and save new excel files
 def get_args():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--data_path", default="/Users/mayatnf/HEAL/HEAL_GRANTS.xlsx", help="path for where excel for where HEAL grant data is saved", type=str)
-    parser.add_argument("--alldata_path", default="/Users/mayatnf/HEAL/ALL_GRANTS.xlsx", help="path for where excel for where ALL grant data is saved", type=str)
-    parser.add_argument("--clintrials_path", default="/Users/mayatnf/HEAL/heal_clintrials_cleaned.csv", help="path for where excel for where clinical grant data is saved", type=str)
-    parser.add_argument("--pain_path", default="/Users/mayatnf/HEAL/pain_data.xlsx", help="path for where excel for where additional pain dataset is saved", type=str)
-    parser.add_argument("--cleaned", default="/Users/mayatnf/HEAL/cleaned_data.xlsx", help="path for where excel for clean data", type=str)
-    parser.add_argument("--outcome_combined", default="/Users/mayatnf/HEAL/outcome_combined_data.xlsx", help="path for where excel for where additional pain dataset is added", type=str)
-    parser.add_argument("--science_preds", default="/Users/mayatnf/HEAL/science_preds_NLP.xlsx", help="path for where excel for where science type predictions are saved", type=str)
-    parser.add_argument("--outcome_preds", default="/Users/mayatnf/HEAL/outcome_preds_NLP.xlsx", help="path for where excel for where outcome type predictions are saved", type=str)
-    parser.add_argument("--milestone_preds", default="/Users/mayatnf/HEAL/milestone_preds_NLP.xlsx", help="path for where excel for where milestone type predictions are saved", type=str)
+    parser.add_argument("--data_path", default="/Users/mayatnf/HEAL/original_data/HEAL_GRANTS.xlsx", help="path for where excel for where HEAL grant data is saved", type=str)
+    parser.add_argument("--clintrials_path", default="/Users/mayatnf/HEAL/cleaned_data/heal_clintrials_cleaned.csv", help="path for where excel for where clinical grant data is saved", type=str)
+    parser.add_argument("--pain_path", default="/Users/mayatnf/HEAL/cleaned_data/pain_data.xlsx", help="path for where excel for where additional pain dataset is saved", type=str)
+    parser.add_argument("--cleaned", default="/Users/mayatnf/HEAL/cleaned_data/cleaned_data.xlsx", help="path for where excel for clean data", type=str)
+    parser.add_argument("--outcome_combined", default="/Users/mayatnf/HEAL/cleaned_data/outcome_combined_data.xlsx", help="path for where excel for where additional pain dataset is added", type=str)
+    parser.add_argument("--science_preds", default="/Users/mayatnf/HEAL/results/predictions_NLP/science_preds_NLP.xlsx", help="path for where excel for where science type predictions are saved", type=str)
+    parser.add_argument("--outcome_preds", default="/Users/mayatnf/HEAL/results/predictions_NLP/outcome_preds_NLP.xlsx", help="path for where excel for where outcome type predictions are saved", type=str)
+    parser.add_argument("--milestone_preds", default="/Users/mayatnf/HEAL/results/predictions_NLP/milestone_preds_NLP.xlsx", help="path for where excel for where milestone type predictions are saved", type=str)
     
     args = parser.parse_args()
     return args

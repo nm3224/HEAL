@@ -33,15 +33,15 @@ warnings.filterwarnings("ignore")
 
 def get_args():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--data_path", default="/Users/mayatnf/HEAL/HEAL_GRANTS.xlsx", help="path for where excel for where HEAL grant data is saved", type=str)
-    parser.add_argument("--alldata_path", default="/Users/mayatnf/HEAL/ALL_GRANTS.xlsx", help="path for where excel for where ALL grant data is saved", type=str)
-    parser.add_argument("--matched_path", default="/Users/mayatnf/HEAL/matched_models.xlsx", help="path for where excel for where ML model and NLP rule based models data matches/mismatches is saved", type=str)
-    parser.add_argument("--clintrials_path", default="/Users/mayatnf/HEAL/heal_clintrials_cleaned.csv", help="path for where excel for where clinical grant data is saved", type=str)
-    parser.add_argument("--cleaned", default="/Users/mayatnf/HEAL/cleaned_data.xlsx", help="path for where excel for clean data", type=str)
-    parser.add_argument("--outcome_combined", default="/Users/mayatnf/HEAL/outcome_combined_data.xlsx", help="path for where excel for where additional pain dataset is added", type=str)
-    parser.add_argument("--science_preds", default="/Users/mayatnf/HEAL/science_preds_ML.xlsx", help="path for where excel for where science type predictions are saved", type=str)
-    parser.add_argument("--outcome_preds", default="/Users/mayatnf/HEAL/outcome_preds_ML.xlsx", help="path for where excel for where outcome type predictions are saved", type=str)
-    parser.add_argument("--milestone_preds", default="/Users/mayatnf/HEAL/milestone_preds_ML.xlsx", help="path for where excel for where milestone type predictions are saved", type=str)
+    parser.add_argument("--data_path", default="/Users/mayatnf/HEAL/original_daya/HEAL_GRANTS.xlsx", help="path for where excel for where HEAL grant data is saved", type=str)
+    parser.add_argument("--matched_path", default="/Users/mayatnf/HEAL/results/matched_models.xlsx", help="path for where excel for where ML model and NLP rule based models data matches/mismatches is saved", type=str)
+    parser.add_argument("--clintrials_path", default="/Users/mayatnf/HEAL/cleaned_data/heal_clintrials_cleaned.csv", help="path for where excel for where clinical grant data is saved", type=str)
+    parser.add_argument("--cleaned", default="/Users/mayatnf/HEAL/cleaned_data/cleaned_data.xlsx", help="path for where excel for clean data", type=str)
+    parser.add_argument("--outcome_combined", default="/Users/mayatnf/HEAL/cleaned_data/outcome_combined_data.xlsx", help="path for where excel for where additional pain dataset is added", type=str)
+    parser.add_argument("--science_preds", default="/Users/mayatnf/HEAL/results/predictions_ML/science_preds_ML.xlsx", help="path for where excel for where science type predictions are saved", type=str)
+    parser.add_argument("--outcome_preds", default="/Users/mayatnf/HEAL/results/predictions_ML/outcome_preds_ML.xlsx", help="path for where excel for where outcome type predictions are saved", type=str)
+    parser.add_argument("--milestone_preds", default="/Users/mayatnf/HEAL/results/predictions_ML/milestone_preds_ML.xlsx", help="path for where excel for where milestone type predictions are saved", type=str)
+    parser.add_argument("--visuals", default="/Users/mayatnf/HEAL/results/visuals/", help="path for where excel for where visuals are saved", type=str)
 
     args = parser.parse_args()
     return args
@@ -49,8 +49,9 @@ def get_args():
 #FOR OUTCOME AND MILESTONE
 def all_pipelines(df, text_col, label, use_smote):
 
-    visuals(df[label], f"overall_{label}.png")
-    
+    args = get_args()
+    visuals(df[label], args.visuals, f"overall_{label}.png")
+
     # Split the data into training and testing sets
     train_df, test_df = model_selection.train_test_split(df, test_size=0.25)
     Train_X = train_df[text_col]
@@ -58,7 +59,7 @@ def all_pipelines(df, text_col, label, use_smote):
     Test_X = test_df[text_col]
     Test_Y = test_df[label]
 
-    visuals(Train_Y, f"before_smote_train_{label}.png")
+    visuals(Train_Y, args.visuals, f"before_smote_train_{label}.png")
 
     # Instantiate a random forest classifier using pipeline method
     if use_smote == True: 
@@ -80,7 +81,7 @@ def all_pipelines(df, text_col, label, use_smote):
         vectorizer = TfidfVectorizer()
         x_tf = vectorizer.fit_transform(Train_X)
         x, y = oversample.fit_resample(x_tf, Train_Y)
-        visuals(y, f"after_smote_train_{label}.png")
+        visuals(y, args.visuals,  f"after_smote_train_{label}.png")
     
     #Fit the model
     rf_textclassifier.fit(Train_X, Train_Y)
@@ -100,9 +101,8 @@ def all_pipelines(df, text_col, label, use_smote):
 
 #Science- Basic, Clinical, Health Services Research, Implementation Research
 def knn_classifier(train_df, test_df, text_col, label):
-    
-    visuals(train_df[label] + test_df[label], "overall.png")
-    
+    args = get_args()
+
     Train_X = train_df[text_col]
     Train_Y = train_df[label]
     Test_X = test_df[text_col]
@@ -229,18 +229,16 @@ def main():
     train_df, test_df = model_selection.train_test_split(df_heal, test_size=0.25)
     
     #Visual training data distribution
-    #data_dist(train_df, ['Science- Basic', 'Science- Translational', 'Science- Clinical', 'Science- Core Services', 'Science- Systematic Meta-analyses', 'EPIDEMIOLOGICAL', 'DISEASE-RELATED BASIC', 'HEALTH SERVICES RESEARCH', 'IMPLEMENTATION RESEARCH'])
+    data_dist(train_df, ['Science- Basic', 'Science- Translational', 'Science- Clinical', 'Science- Core Services', 'Science- Systematic Meta-analyses', 'EPIDEMIOLOGICAL', 'DISEASE-RELATED BASIC', 'HEALTH SERVICES RESEARCH', 'IMPLEMENTATION RESEARCH'], args.visuals)
 
     #Categorize Outcomes using model-- using smote 
     # Drops empty rows-- or, make sure EVERY row is filled with correct info, otherwise there will be missing unlabeled studies in the product.
     df_cleaned = df_pain_heal[['Combined Cleaned', 'HEAL Category- Primary Outcome', 'Appl ID']].dropna()
-    all_pipelines(df_cleaned, 'Combined Cleaned', 'HEAL Category- Primary Outcome', True).to_excel(args.outcome_preds)
+    #all_pipelines(df_cleaned, 'Combined Cleaned', 'HEAL Category- Primary Outcome', True).to_excel(args.outcome_preds)
     
     #Categorize Milestones using model
-    all_pipelines(df_heal, 'Combined Cleaned', 'Milestones', False).to_excel(args.milestone_preds)
-
-    pdb.set_trace()
-
+    #all_pipelines(df_heal, 'Combined Cleaned', 'Milestones', False).to_excel(args.milestone_preds)
+    
     #K-Nearest Neighbors Classifiers
     dfs = []
     for label in ['Science- Basic', 'Science- Clinical', 'HEALTH SERVICES RESEARCH', 'IMPLEMENTATION RESEARCH']:
@@ -262,9 +260,12 @@ def main():
         new = svm_classifier(train_df, test_df, 'Combined Cleaned', label)
         dfs.append(new)
     
-    pdb.set_trace()
-    
     predictions = reduce(lambda  left,right: pd.merge(left,right,on=['Appl ID'], how='outer'), dfs)
+    predictions[['Appl ID', 'Combined Cleaned', 'Science', 'Science- Basic_ML', 'Science- Translational_ML', 'Science- Clinical_ML', 'Science- Core Services_ML', 'Science- Systematic Meta-analyses_ML', 'EPIDEMIOLOGICAL_ML', 'DISEASE-RELATED BASIC_ML', 'HEALTH SERVICES RESEARCH_ML', 'IMPLEMENTATION RESEARCH_ML']].to_excel(args.science_preds)
+    
+    pdb.set_trace()
+
+    #needs work
     predictions['Science_1'] = np.empty((len(predictions), 0)).tolist()
     for i, row in predictions.iterrows():
         for scitype in ['Science- Basic_ML', 'Science- Translational_ML', 'Science- Clinical_ML', 'Science- Core Services_ML', 'Science- Systematic Meta-analyses_ML', 'EPIDEMIOLOGICAL_ML', 'DISEASE-RELATED BASIC_ML', 'HEALTH SERVICES RESEARCH_ML', 'IMPLEMENTATION RESEARCH_ML']:

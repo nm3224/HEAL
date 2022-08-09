@@ -7,12 +7,12 @@ import argparse
 #Create arguments to access and save new excel files
 def get_args():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--data_path", default="/Users/mayatnf/HEAL/HEAL_GRANTS.xlsx", help="path for where excel for where HEAL grant data is saved", type=str)
-    parser.add_argument("--pain_term_path", default="/Users/mayatnf/HEAL/_rcdc_includes_Pain.xlsx", help="path for where excel for pain term sets is saved", type=str)
-    parser.add_argument("--opioid_term_path", default="/Users/mayatnf/HEAL/_rcdc_includes_Opioids.xlsx", help="path for where excel for pain term sets is saved", type=str)
-    parser.add_argument("--oud_term_path", default="/Users/mayatnf/HEAL/rcdc_includes_Opioid Misuse and Addiction.xlsx", help="path for where excel for oud term sets is saved", type=str)
-    parser.add_argument("--new_pain_terms", default="/Users/mayatnf/HEAL/pain_terms.xlsx", help="path for where to save excel of new pain term set", type=str)
-    parser.add_argument("--new_oud_terms", default="/Users/mayatnf/HEAL/oud_terms.xlsx", help="path for where to save excel of new oud term set", type=str)
+    parser.add_argument("--data_path", default="/Users/mayatnf/HEAL/original_data/HEAL_GRANTS.xlsx", help="path for where excel for where HEAL grant data is saved", type=str)
+    parser.add_argument("--pain_term_path", default="/Users/mayatnf/HEAL/RCDC/_rcdc_includes_Pain.xlsx", help="path for where excel for pain term sets is saved", type=str)
+    parser.add_argument("--opioid_term_path", default="/Users/mayatnf/HEAL/RCDC/_rcdc_includes_Opioids.xlsx", help="path for where excel for pain term sets is saved", type=str)
+    parser.add_argument("--oud_term_path", default="/Users/mayatnf/HEAL/RCDC/rcdc_includes_Opioid Misuse and Addiction.xlsx", help="path for where excel for oud term sets is saved", type=str)
+    parser.add_argument("--new_pain_terms", default="/Users/mayatnf/HEAL/term_sets/pain_terms.xlsx", help="path for where to save excel of new pain term set", type=str)
+    parser.add_argument("--new_oud_terms", default="/Users/mayatnf/HEAL/term_sets/oud_terms.xlsx", help="path for where to save excel of new oud term set", type=str)
 
     args = parser.parse_args()
     return args  

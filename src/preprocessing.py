@@ -14,19 +14,18 @@ warnings.filterwarnings("ignore")
 def get_args():
     parser = argparse.ArgumentParser()
     parser.add_argument("--data_path", default="/Users/mayatnf/HEAL/original_data/HEAL_GRANTS.xlsx", help="path for where excel for where HEAL grant data is saved", type=str)
-    parser.add_argument("--alldata_path", default="/Users/mayatnf/HEAL/original_data/ALL_GRANTS.xlsx", help="path for where excel for where ALL grant data is saved", type=str)
     parser.add_argument("--pain_path", default="/Users/mayatnf/HEAL/original_data/pain_data.xlsx", help="path for where excel for where additional pain dataset is saved", type=str)
     parser.add_argument("--cleaned", default="/Users/mayatnf/HEAL/cleaned_data/cleaned_data.xlsx", help="path for where excel for clean data", type=str)
-    parser.add_argument("--outcome_combined", default="/Users/mayatnf/cleaned_data/HEAL/outcome_combined_data.xlsx", help="path for where excel for where additional pain dataset is added", type=str)
+    parser.add_argument("--outcome_combined", default="/Users/mayatnf/HEAL/cleaned_data/outcome_combined_data.xlsx", help="path for where excel for where additional pain dataset is added", type=str)
     args = parser.parse_args()
     return args
 
 def main():
 
     args = get_args()
+    
     #Read in excel files into dataframes
     df_heal = pd.read_excel(args.data_path, sheet_name = 0)
-    #df_all = pd.read_excel(args.alldata_path, sheet_name = 0)
     df_pain = pd.read_excel(args.pain_path, sheet_name = 1)
     
     #Remove stopwords from abstracts. Alter variable text_cols based on column names for text 
