@@ -1,6 +1,6 @@
 ### ALL PYTHON CODE
 
-- `codes.py` - contains all keyterms/regular expressions used for labeling. Contains some terms pulled from RCDC--will need to import those files into a respective RCDC folder or change the location in argparse before running. 
+- `codes.py` - contains all keyterms/regular expressions used for labeling. Contains some terms pulled from RCDC. Make sure those files are contained in a respective RCDC folder. To pull excel file of existing term sets and ontologies being used, look inside folder `term_sets` and use function `read_excel`. 
 - `preprocessing.py` - code to pre-process text; remove stop words, sentence filter, etc. current dataset files are saved in `cleaned_data` folder. Merges together pain + HEAL datasets, saves in  `cleaned_data` folder. Note this includes the code to create columns 'Combined Cleaned' for the text and 'Filtered Cleaned,' which utilizes the sentence wrapper searching for aim/objective centered words. Also prepares the dependent variable label columns for machine learning by converting science-type lists to individual labels of binary 1s/0s.  
 - `text_utils.py` - contains various functions used in pre-processing, hyper-parameter tuning for the models, data visualizations, sentence wrapper, etc. Look at comments above each function for more details. 
 - `key_term_search.py` - NLP, rule-based approaches to search for and count key terms to label. Label predictions saved to `predictions_NLP` under `results/'  
