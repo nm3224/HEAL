@@ -1,0 +1,4 @@
+name: new_environment_1
+channels:
+  - defaults
+prefix: C:\Users\mayatnf\Anaconda3\envs\new_environment_1
