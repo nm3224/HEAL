@@ -1,6 +1,6 @@
 ### ALL PYTHON CODE
 
-- `codes.py` - contains all keyterms/regular expressions used for labeling. Contains some terms pulled from RCDC--will need to import that into a respective RCDC folder or change the location in argparse before running. If you want to add to existing term sets, read in existing excel file of current terms being leveraged from folder `term_sets` and adapt code to add to this list.    
+- `codes.py` - contains all keyterms/regular expressions used for labeling. Contains some terms pulled from RCDC--will need to import those files into a respective RCDC folder or change the location in argparse before running. 
 - `preprocessing.py` - code to pre-process text; remove stop words, sentence filter, etc. current dataset files are saved in `cleaned_data` folder.
 - `text_utils.py` - contains various functions used in pre-processing, data visualizations, sentence wrapper, etc. Look at comments above each function for more details. 
 - `key_term_search.py` - NLP, rule-based approaches to search for and count key terms to label. Label predictions saved to `predictions_NLP` under `results/'  
