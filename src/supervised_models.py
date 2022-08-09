@@ -50,7 +50,7 @@ def get_args():
 def all_pipelines(df, text_col, label, use_smote):
 
     args = get_args()
-    visuals(df[label], args.visuals, f"overall_{label}.png")
+    visuals(df[label], args.visuals, f"overall_{label}")
 
     # Split the data into training and testing sets
     train_df, test_df = model_selection.train_test_split(df, test_size=0.25)
@@ -58,8 +58,6 @@ def all_pipelines(df, text_col, label, use_smote):
     Train_Y = train_df[label]
     Test_X = test_df[text_col]
     Test_Y = test_df[label]
-
-    visuals(Train_Y, args.visuals, f"before_smote_train_{label}.png")
 
     # Instantiate a random forest classifier using pipeline method
     if use_smote == True: 
@@ -69,6 +67,7 @@ def all_pipelines(df, text_col, label, use_smote):
             ('smote', SMOTE()),
             ('rf', RandomForestClassifier(n_estimators = 1000))
             ])
+        visuals(Train_Y, args.visuals, f"before_smote_train_{label}")
     else:
         rf_textclassifier = Pipeline([
             ('tfidf', TfidfVectorizer()),
@@ -81,7 +80,7 @@ def all_pipelines(df, text_col, label, use_smote):
         vectorizer = TfidfVectorizer()
         x_tf = vectorizer.fit_transform(Train_X)
         x, y = oversample.fit_resample(x_tf, Train_Y)
-        visuals(y, args.visuals,  f"after_smote_train_{label}.png")
+        visuals(y, args.visuals,  f"after_smote_train_{label}")
     
     #Fit the model
     rf_textclassifier.fit(Train_X, Train_Y)
