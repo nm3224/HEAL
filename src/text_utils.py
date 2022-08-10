@@ -136,3 +136,16 @@ def tuning(x, y):
     best_n = best_model.best_estimator_.get_params()['n_neighbors']
 
     return best_leaf_size, best_p, best_n
+
+#Find mention of pain in RCDc category columb to determine if studies' primary outcomes are only OUD or both
+def RCDC_terms(df, col, name):
+    pain = []
+    for text in df[col]:
+        if 'pain' in str(text).lower():
+            pain.append('Yes')
+        else:
+            pain.append('No')
+    df['Pain'] = pain
+    print(len(df.loc[df['Pain'] == 'Yes'])/len(df)*100)
+    print(len(df))
+    df.loc[df['Pain'] == 'Yes'].to_excel(name)
