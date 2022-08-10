@@ -6,7 +6,7 @@ import nltk
 nltk.download('stopwords')
 from nltk.corpus import stopwords
 import re 
-from text_utils import clean_data, create_columns, filter_sen, change_columns, create_columns, find_words
+from text_utils import RCDC_terms, clean_data, create_columns, filter_sen, change_columns, create_columns, find_words
 import pdb 
 import warnings
 warnings.filterwarnings("ignore")
@@ -19,6 +19,7 @@ def get_args():
     parser.add_argument("--cleaned", default="/Users/mayatnf/HEAL/cleaned_data/cleaned_HEAL_data.xlsx", help="path for where excel for clean data", type=str)
     parser.add_argument("--outcome_combined", default="/Users/mayatnf/HEAL/cleaned_data/outcome_combined_data.xlsx", help="path for where excel for where additional pain dataset is added", type=str)
     parser.add_argument("--oud_path", default="/Users/mayatnf/HEAL/original_data/NIDA_oud.xlsx", help="path for where excel for where additional oud dataset is added", type=str)
+    parser.add_argument("--pain_mentions", default="/Users/mayatnf/HEAL/cleaned_data/oud_and_pain_data.xlsx", help="path for where excel for where additional oud dataset is added", type=str)
     args = parser.parse_args()
     return args
 
@@ -30,6 +31,9 @@ def main():
     df_heal = pd.read_excel(args.data_path, sheet_name = 0)
     df_pain = pd.read_excel(args.pain_path, sheet_name = 1)
     df_oud = pd.read_excel(args.oud_path, sheet_name = 0)
+    
+    #Check for pain terms
+    RCDC_terms(df_oud, 'RCDC Categories', args.pain_mentions)
     
     #Remove stopwords from abstracts. Alter variable text_cols based on column names for text 
     text_cols = ['Abstract', 'Specific Aims', 'Public Health Relevance']
