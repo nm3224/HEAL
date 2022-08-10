@@ -228,11 +228,11 @@ def main():
     train_df, test_df = model_selection.train_test_split(df_heal, test_size=0.25)
     
     #Visual training data distribution
-    data_dist(train_df, ['Science- Basic', 'Science- Translational', 'Science- Clinical', 'Science- Core Services', 'Science- Systematic Meta-analyses', 'EPIDEMIOLOGICAL', 'DISEASE-RELATED BASIC', 'HEALTH SERVICES RESEARCH', 'IMPLEMENTATION RESEARCH'], args.visuals)
+    #data_dist(train_df, ['Science- Basic', 'Science- Translational', 'Science- Clinical', 'Science- Core Services', 'Science- Systematic Meta-analyses', 'EPIDEMIOLOGICAL', 'DISEASE-RELATED BASIC', 'HEALTH SERVICES RESEARCH', 'IMPLEMENTATION RESEARCH'], args.visuals)
 
     #Categorize Outcomes using model-- using smote 
     # Drops empty rows-- or, make sure EVERY row is filled with correct info, otherwise there will be missing unlabeled studies in the product.
-    df_cleaned = df_pain_heal[['Combined Cleaned', 'HEAL Category- Primary Outcome', 'Appl ID']].dropna()
+    #df_cleaned = df_pain_heal[['Combined Cleaned', 'HEAL Category- Primary Outcome', 'Appl ID']].dropna()
     #all_pipelines(df_cleaned, 'Combined Cleaned', 'HEAL Category- Primary Outcome', True).to_excel(args.outcome_preds)
     
     #Categorize Milestones using model
@@ -246,7 +246,7 @@ def main():
 
     #Logistic Regression Classifiers
     new = lr_classifier(train_df, test_df, 'Combined Cleaned', 'DISEASE-RELATED BASIC')
-    #dfs.append(new)
+    dfs.append(new)
     lr_classifier(train_df, test_df, 'Combined Cleaned', 'Science- Clinical')
 
     #Random Forest Classifiers
