@@ -234,13 +234,13 @@ def main():
 
     #Categorize Outcomes using model-- using smote 
     # Drops empty rows-- or, make sure EVERY row is filled with correct info, otherwise there will be missing unlabeled studies in the product.
-    df_cleaned = df_all[['Combined Cleaned', 'HEAL Category- Primary Outcome', 'Appl ID']].dropna()
-    all_pipelines(df_cleaned, 'Combined Cleaned', 'HEAL Category- Primary Outcome', True).to_excel(args.outcome_preds)
-    pdb.set_trace()
+    #df_cleaned = df_all[['Combined Cleaned', 'HEAL Category- Primary Outcome', 'Appl ID']].dropna()
+    #all_pipelines(df_cleaned, 'Combined Cleaned', 'HEAL Category- Primary Outcome', True).to_excel(args.outcome_preds)
+    
 
     #Categorize Milestones using model
-    #all_pipelines(df_heal, 'Combined Cleaned', 'Milestones', False).to_excel(args.milestone_preds)
-    
+    all_pipelines(df_heal, 'Combined Cleaned', 'Milestones', False).to_excel(args.milestone_preds)
+    pdb.set_trace()
     #K-Nearest Neighbors Classifiers
     dfs = []
     for label in ['Science- Basic', 'Science- Clinical', 'HEALTH SERVICES RESEARCH', 'IMPLEMENTATION RESEARCH']:
