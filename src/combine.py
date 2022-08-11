@@ -19,7 +19,8 @@ def get_args():
     
     args = parser.parse_args()
     return args
-
+    
+##Not really working...
 def combine(df_1, df_2, col_1, col_2, col_3):
     df = pd.merge(df_1, df_2, on = 'Appl ID', how = 'inner')
     final_labels = []
@@ -29,7 +30,12 @@ def combine(df_1, df_2, col_1, col_2, col_3):
         else:
             final_labels.append('Check Again')
     df['Final Label'] = final_labels
-    print(f"Correct: {np.round(len(df.loc[df['Final Label'] != 'Check Again'])/len(df)*100, 2)}")
+    print(f"Matches: {np.round(len(df.loc[df['Final Label'] != 'Check Again'])/len(df)*100, 2)}")
+    both = df.loc[df['Final Label'] != 'Check Again']
+    #print("Correct:", len(both.loc[both['Final Label'] == both[f"{col_3}_x"]]))
+    #print("Incorrect: ",  len(both.loc[both['Final Label'] != both[f"{col_3}_x"]]))
+    #print(len(df))
+    pdb.set_trace()
     return df[['Appl ID', col_1, col_2, f"{col_3}_x", 'Final Label']]
 
 def main():
