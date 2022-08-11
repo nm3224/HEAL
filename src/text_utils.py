@@ -137,7 +137,7 @@ def tuning(x, y):
 
     return best_leaf_size, best_p, best_n
 
-#Find mention of pain in RCDc category columb to determine if studies' primary outcomes are only OUD or both
+#Find mention of pain in RCDC category columb to determine if studies' primary outcomes are only OUD or both
 def RCDC_terms(df, col, name):
     pain = []
     for text in df[col]:
