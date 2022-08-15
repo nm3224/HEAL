@@ -137,8 +137,8 @@ def knn_classifier(train_df, test_df, text_col, label):
     # Print accuracy score
     print(f"KNN Accuracy Score {label} -> ",accuracy_score(knn_predictions, Test_Y)*100)
     test_df[f"{label}_ML"] = knn_predictions 
-    test_df[f"{label}_ML"] = test_df[f"{label}_ML"].replace(1, 'Yes')
-    test_df[f"{label}_ML"] = test_df[f"{label}_ML"].replace(0, 'No')
+    test_df = test_df.replace(1, 'Yes')
+    test_df = test_df.replace(0, 'No')
     return test_df[['Appl ID', 'Combined Cleaned', 'Science', label, f"{label}_ML"]]   
 
 def rf_classifier(train_df, test_df, text_col, label):
@@ -162,8 +162,8 @@ def rf_classifier(train_df, test_df, text_col, label):
     
     print(f"RF Accuracy Score {label} -> ",accuracy_score(rf_predictions, Test_Y)*100)
     test_df[f"{label}_ML"] = rf_predictions 
-    test_df[f"{label}_ML"] = test_df[f"{label}_ML"].replace(1, 'Yes')
-    test_df[f"{label}_ML"] = test_df[f"{label}_ML"].replace(0, 'No')
+    test_df = test_df.replace(1, 'Yes')
+    test_df = test_df.replace(0, 'No')
     return test_df[[ 'Appl ID', 'Combined Cleaned', 'Science', label, f"{label}_ML"]] 
 
 def svm_classifier(train_df, test_df, text_col, label):
@@ -188,8 +188,8 @@ def svm_classifier(train_df, test_df, text_col, label):
 
     print(f"SVM Accuracy Score {label} -> ",accuracy_score(svm_predictions, Test_Y)*100) 
     test_df[f"{label}_ML"] = svm_predictions
-    test_df[f"{label}_ML"] = test_df[f"{label}_ML"].replace(1, 'Yes')
-    test_df[f"{label}_ML"] =test_df[f"{label}_ML"].replace(0, 'No')
+    test_df = test_df.replace(1, 'Yes')
+    test_df =test_df.replace(0, 'No')
     return test_df[['Appl ID', 'Combined Cleaned', 'Science', label, f"{label}_ML"]] 
 
 def lr_classifier(train_df, test_df, text_col, label):
@@ -213,8 +213,8 @@ def lr_classifier(train_df, test_df, text_col, label):
 
     print(f"Logistic Regression Accuracy Score {label} -> ",accuracy_score(lr_predictions, Test_Y)*100)
     test_df[f"{label}_ML"] = lr_predictions 
-    test_df[f"{label}_ML"] = test_df[f"{label}_ML"].replace(1, 'Yes')
-    test_df[f"{label}_ML"] = test_df[f"{label}_ML"].replace(0, 'No')
+    test_df = test_df.replace(1, 'Yes')
+    test_df = test_df.replace(0, 'No')
     return test_df[['Appl ID', 'Combined Cleaned', 'Science', label, f"{label}_ML"]] 
 
 def main(): 
@@ -241,6 +241,7 @@ def main():
     #Categorize Milestones using model
     all_pipelines(df_heal, 'Combined Cleaned', 'Milestones', False).to_excel(args.milestone_preds)
     pdb.set_trace()
+    
     #K-Nearest Neighbors Classifiers
     dfs = []
     for label in ['Science- Basic', 'Science- Clinical', 'HEALTH SERVICES RESEARCH', 'IMPLEMENTATION RESEARCH']:
