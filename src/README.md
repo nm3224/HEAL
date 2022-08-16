@@ -1,13 +1,15 @@
 ### ALL PYTHON CODE
 
-- `codes.py` - contains all keyterms/regular expressions used for labeling. Contains some terms pulled from RCDC. Make sure those files are contained in a respective RCDC folder. To pull excel file of existing term sets and ontologies being used, look inside folder `term_sets` and use function `read_excel`. Note that the function mainly loads the RCDC files including the term sets into dataframes we can use to pull these terms. We only preserve those terms with weight of 100 to increase accuracy. I'm not sure how to incorporate terms with weights less than 100. I think the smaller the regular expressions/ontologies, the better--we need to focus on the most significant words; quality > quantity.
+- `codes.py` - contains all keyterms/regular expressions used for labeling. Contains some terms pulled from RCDC. Make sure those files are contained in a respective RCDC folder. To pull excel file of existing term sets and ontologies being used, look inside folder `term_sets` and use function `read_excel`. Note that the function mainly loads the RCDC files including the term sets into dataframes we can use to pull these terms. We only preserve those terms with weight of 100 to increase accuracy. I'm not sure how to incorporate terms with weights less than 100. I think the smaller the regular expressions/ontologies, the better--we need to focus on the most significant words; quality > quantity. 
+   - This file needs to be edited to include the science type codes from the `term_sets/Science_Type` folder.
 
 - `preprocessing.py` - code to pre-process text; remove stop words, sentence filter, etc. current dataset files are saved in `cleaned_data` folder. Merges together pain + HEAL datasets, saves in  `cleaned_data` folder. Note this includes the code to create columns 'Combined Cleaned' for the text and 'Filtered Cleaned,' which utilizes the sentence wrapper searching for aim/objective centered words. Also prepares the dependent variable label columns for machine learning by converting science-type lists to individual labels of binary 1s/0s.  
 
 - `text_utils.py` - contains various functions used in pre-processing, hyper-parameter tuning for the models, data visualizations, sentence wrapper, etc. Look at comments above each function for more details. 
 
 - `key_term_search.py` - NLP, rule-based approaches to search for and count key terms to label. Label predictions saved to `predictions_NLP` under `results/'  
-
+   - This file needs work on the science-type classifiers. It is a very rough base/draft.
+   
 - `supervised_models.py` - supervised machine learning approaches to automate labeling. Includes various pipelines ex. Random Forest, KNN, SVM, Logistic Regression. Each have their own functions. Utilized TF-IDF to convert words to feature vectors. Performed dimensionality reduction on matrix using Truncated SVD; used SMOTE to oversample minority labels. Label predictions saved to `predictions_ML` under `results/`. Remember when using on new datasets to train using entire HEAL dataset (all 956 studies)--right now, for testing purposes, it is only being trained on 75% of the data.
   - May need to control-c (^C) terminal and re-run if terminal freezes up.  
  
