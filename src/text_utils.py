@@ -12,6 +12,8 @@ from codes import aims
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.model_selection import GridSearchCV
+from sklearn.feature_extraction.text import TfidfVectorizer
+import ast 
 
 #Function to clean and filter data
 def clean_data(df, cols):
@@ -53,18 +55,19 @@ def filter_sen(ls, words):
             ls.remove(sen)
     return ls
 
-#Find words with highest frequencies/counts using countvec for science types to help build ontologies
-def find_words(df, label, labels, text):
+#Find words with highest tfidfs to help potentially build ontologies
+def find_words(df, label, labels, text, file_path):
     for lab in labels:
         corpus = []
         l_df = df.loc[df[label] == lab]
         for t in l_df[text]:
             corpus.append(str(t))
-            vectorizer = CountVectorizer()
+            vectorizer =  TfidfVectorizer()
             X = vectorizer.fit_transform([' '.join(corpus)])
             my_dict= dict(zip(vectorizer.get_feature_names_out(), X.toarray()[0]))
-            dict_df = pd.DataFrame({'words': list(my_dict.keys()), 'counts': list(my_dict.values())}).sort_values(by = ['counts'], ascending = True)
+            dict_df = pd.DataFrame({'words': list(my_dict.keys()), 'scores': list(my_dict.values())}).sort_values(by='scores', ascending = False)
         print(lab, dict_df.head(15))
+        dict_df.head(15).to_excel(f"{file_path}/{label}_{lab}_tfidf.xlsx")
 
 #Change Science Type Lists into 1-0 columns
 def change_columns(df, sci_types):
@@ -149,3 +152,21 @@ def RCDC_terms(df, col, name):
     print(len(df.loc[df['Pain'] == 'Yes'])/len(df)*100)
     print(len(df))
     df.loc[df['Pain'] == 'Yes'].to_excel(name)
+
+def pain_oud_split(df):
+    ouds = []
+    pains = []
+    for val in df['HEAL Category- Primary Outcome']:
+        if val == 'OUD':
+            ouds.append(1)
+        if val == 'Pain':
+            pains.append(1)
+        if val == 'Both':
+            ouds.append(1)
+            pains.append(1)
+        else:
+            ouds.append(0)
+            pains.append(0)
+    df['Pain'] = pains
+    df['OUD'] = ouds
+    return df
