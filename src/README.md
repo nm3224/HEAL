@@ -10,6 +10,7 @@
 - `key_term_search.py` - NLP, rule-based approaches to search for and count key terms to label. Label predictions saved to `predictions_NLP` under `results/'  
    - This file **needs work** on the science-type classifiers. It is a very rough base/draft.
    - **The science-type functions HAVE NOT been debugged.**
+   - I think the regular expressions being used to classify milestone projects as Y/N need work. There's not nearly enough terms being leveraged.
    
 - `supervised_models.py` - supervised machine learning approaches to automate labeling. Includes various pipelines ex. Random Forest, KNN, SVM, Logistic Regression. Each have their own functions. Utilized TF-IDF to convert words to feature vectors. Performed dimensionality reduction on matrix using Truncated SVD; used SMOTE to oversample minority labels. Label predictions saved to `predictions_ML` under `results/`. Remember when using on new datasets to train using entire HEAL dataset (all 956 studies)--right now, for testing purposes, it is only being trained on 75% of the data.
   - May need to control-c (^C) terminal and re-run if terminal freezes up.  
