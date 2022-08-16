@@ -117,6 +117,10 @@ def data_dist(df, columns, name):
     plt.clf()
 
 def tuning(x, y):
+    # For our K-Nearest Neighbors algorithm (KNN), 
+    # Let's run a series of tests using the function below to find the optimum k-value, or number of nearest neighbors for our classifier. 
+    # The default is 5. We will also find the best leaf size and best p for our model. We will call this function in our larger knn classifier function. To reiterate, KNN works by classifying data based on classes of its nearest neighbors.
+    
     #List Hyperparameters that we want to tune.
     leaf_size = list(range(1,50))
     n_neighbors = list(range(1,30))
