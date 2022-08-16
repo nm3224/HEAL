@@ -17,7 +17,7 @@ def get_args():
     parser.add_argument("--data_path", default="/Users/mayatnf/HEAL/original_data/HEAL_GRANTS.xlsx", help="path for where excel for where HEAL grant data is saved", type=str)
     parser.add_argument("--clintrials_path", default="/Users/mayatnf/HEAL/cleaned_data/heal_clintrials_cleaned.csv", help="path for where excel for where clinical grant data is saved", type=str)
     parser.add_argument("--pain_path", default="/Users/mayatnf/HEAL/cleaned_data/pain_data.xlsx", help="path for where excel for where additional pain dataset is saved", type=str)
-    parser.add_argument("--cleaned", default="/Users/mayatnf/HEAL/cleaned_data/cleaned_data.xlsx", help="path for where excel for clean data", type=str)
+    parser.add_argument("--cleaned", default="/Users/mayatnf/HEAL/cleaned_data/cleaned_HEAL_data.xlsx", help="path for where excel for clean data", type=str)
     parser.add_argument("--outcome_combined", default="/Users/mayatnf/HEAL/cleaned_data/outcome_combined_data.xlsx", help="path for where excel for where additional pain dataset is added", type=str)
     parser.add_argument("--science_preds", default="/Users/mayatnf/HEAL/results/predictions_NLP/science_preds_NLP.xlsx", help="path for where excel for where science type predictions are saved", type=str)
     parser.add_argument("--outcome_preds", default="/Users/mayatnf/HEAL/results/predictions_NLP/outcome_preds_NLP.xlsx", help="path for where excel for where outcome type predictions are saved", type=str)
@@ -47,6 +47,10 @@ def clin_nonclin(df):
             sci.append('CLINICAL')
    
     return clin_df[['Appl ID', 'Combined Cleaned', 'Combined Filtered', 'Science', 'Science_1']], non_clin_df[['Appl ID', 'Combined Cleaned_x', 'Combined Filtered_x', 'Science_x', 'Science_1']]
+
+# Below is a rough skeleton of what the bagging using NLP should look like. 
+# Here's some key-word, rule-based code I wrote. Again, it's not perfect, and definitely needs work. It is merely a rough base/draft.
+# The key-word regular expressions for science type still need to be defined using the excel files in the folder "Science_Type". This should be done in the codes.py file. 
 
 #Categorizes a study's science types; clinical tree
 def clinicals(df, col):
