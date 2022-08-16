@@ -157,15 +157,13 @@ def pain_oud_split(df):
     ouds = []
     pains = []
     for val in df['HEAL Category- Primary Outcome']:
-        if val == 'OUD':
+        if val == 'OUD' or val == 'Both':
             ouds.append(1)
-        if val == 'Pain':
-            pains.append(1)
-        if val == 'Both':
-            ouds.append(1)
-            pains.append(1)
         else:
             ouds.append(0)
+        if val == 'Pain' or val == 'Both':
+            pains.append(1)
+        else:
             pains.append(0)
     df['Pain'] = pains
     df['OUD'] = ouds

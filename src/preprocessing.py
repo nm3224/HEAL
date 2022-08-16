@@ -6,7 +6,7 @@ import nltk
 nltk.download('stopwords')
 from nltk.corpus import stopwords
 import re 
-from text_utils import RCDC_terms, clean_data, create_columns, filter_sen, change_columns, create_columns, find_words
+from text_utils import RCDC_terms, clean_data, create_columns, filter_sen, change_columns, create_columns, pain_oud_split
 import pdb 
 import warnings
 warnings.filterwarnings("ignore")
@@ -19,7 +19,7 @@ def get_args():
     parser.add_argument("--cleaned", default="/Users/mayatnf/HEAL/cleaned_data/cleaned_HEAL_data.xlsx", help="path for where excel for clean data", type=str)
     parser.add_argument("--outcome_combined", default="/Users/mayatnf/HEAL/cleaned_data/outcome_combined_data.xlsx", help="path for where excel for where additional pain dataset is added", type=str)
     parser.add_argument("--oud_path", default="/Users/mayatnf/HEAL/original_data/NIDA_oud.xlsx", help="path for where excel for where additional oud dataset is added", type=str)
-    parser.add_argument("--pain_mentions", default="/Users/mayatnf/HEAL/cleaned_data/oud_and_pain_data.xlsx", help="path for where excel for where additional oud dataset is added", type=str)
+    parser.add_argument("--pain_mentions", default="/Users/mayatnf/HEAL/cleaned_data/oud_RCDC_mentions_pain_data.xlsx", help="path for where excel for where additional oud dataset is added", type=str)
     args = parser.parse_args()
     return args
 
@@ -51,7 +51,6 @@ def main():
     
     #Save Cleaned HEAL data so don't have to rerun in future
     df_heal.to_excel(args.cleaned)
-    #df_cleaned = pd.read_excel(args.cleaned)
     
     #Repeat cleaning for OUD data
     text_cols = ['Abstract', 'Specific Aims', 'Public Health Relevance']
@@ -72,6 +71,10 @@ def main():
     #Save Cleaned and combined data for all 3 datasets
     combined = df_heal[['Appl ID', 'Combined Cleaned', 'Combined Filtered', 'HEAL Category- Primary Outcome']].append(df_pain[['Appl ID', 'Combined Cleaned', 'Combined Filtered', 'HEAL Category- Primary Outcome']])
     combined.append(df_oud[['Appl ID', 'Combined Cleaned', 'Combined Filtered', 'HEAL Category- Primary Outcome']])
+    
+    #Split pain/oud columns
+    combined = pain_oud_split(combined)
+    pdb.set_trace()
     combined.to_excel(args.outcome_combined) 
 
 if __name__ == "__main__":
