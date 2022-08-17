@@ -8,7 +8,7 @@
 - `text_utils.py` - contains various functions used in pre-processing, hyper-parameter tuning for the models, data visualizations, sentence wrapper, etc. Look at comments above each function for more details. 
 
 - `key_term_search.py` - NLP, rule-based approaches to search for and count key terms to label. Label predictions saved to `predictions_NLP` under `results/'  
-   - This file **needs work** on the science-type classifiers. It is a very rough base/draft.
+   - This file **needs work** on the science-type classifiers. It is a very **rough base/draft** of what the future code **could** look like.
    - **The science-type functions HAVE NOT been debugged.**
    - I think the regular expressions being used to classify milestone projects as Y/N need work. There's not nearly enough terms being leveraged.
    
