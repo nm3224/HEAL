@@ -263,27 +263,9 @@ def main():
         new = svm_classifier(train_df, test_df, 'Combined Cleaned', label)
         dfs.append(new)
     
+    #put them all in one dataframe
     predictions = reduce(lambda  left,right: pd.merge(left,right,on=['Appl ID'], how='outer'), dfs)
     predictions[['Appl ID', 'Combined Cleaned', 'Science', 'Science- Basic_ML', 'Science- Translational_ML', 'Science- Clinical_ML', 'Science- Core Services_ML', 'Science- Systematic Meta-analyses_ML', 'EPIDEMIOLOGICAL_ML', 'DISEASE-RELATED BASIC_ML', 'HEALTH SERVICES RESEARCH_ML', 'IMPLEMENTATION RESEARCH_ML']].to_excel(args.science_preds)
-    
-    pdb.set_trace()
-
-    #needs work
-    predictions['Science_1'] = np.empty((len(predictions), 0)).tolist()
-    for i, row in predictions.iterrows():
-        for scitype in ['Science- Basic_ML', 'Science- Translational_ML', 'Science- Clinical_ML', 'Science- Core Services_ML', 'Science- Systematic Meta-analyses_ML', 'EPIDEMIOLOGICAL_ML', 'DISEASE-RELATED BASIC_ML', 'HEALTH SERVICES RESEARCH_ML', 'IMPLEMENTATION RESEARCH_ML']:
-            if row[scitype] == 'Yes':
-                if 'Science' in scitype:
-                    st = scitype.split('- ')
-                    st = st[1].split('_')[0].upper()
-                else:
-                    st = scitype.split('_')[0]
-                predictions['Science_1'][i].append(str(st)) 
-    
-    predictions.Science = predictions.Science.apply(ast.literal_eval)
-    predictions['match'] = np.where(predictions['Science'].apply(set) == predictions['Science_1'].apply(set), 'yes', 'no')
-    print(f'Accuracy:', len(predictions.loc[predictions['match'] == 'yes']) / len(predictions) * 100)
-    predictions[['Appl ID', 'Combined Cleaned', 'Science', 'Science- Basic_ML', 'Science- Translational_ML', 'Science- Clinical_ML', 'Science- Core Services_ML', 'Science- Systematic Meta-analyses_ML', 'EPIDEMIOLOGICAL_ML', 'DISEASE-RELATED BASIC_ML', 'HEALTH SERVICES RESEARCH_ML', 'IMPLEMENTATION RESEARCH_ML', 'Science_1']].to_excel(args.science_preds)
 
 if __name__ == "__main__":
     main()
