@@ -15,4 +15,6 @@ conda activate new_environment_1
 - **I couldn't push the data to the repo due to security reasons, but a lot of my argparse functions refer to the file paths I stored it in on my local drive. I had an `original_data` folder, as well as a `cleaned_data` folder for my data.
 
 ### Learn more about HEAL's mission at their [website:](https://heal.nih.gov/about)
-![Helping End Addiction Long Term](project_info/HEAL.png)
+<div style="width:60px ; height:60px">
+  ![Helping End Addiction Long Term](project_info/HEAL.png)
+</div>
