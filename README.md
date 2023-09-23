@@ -14,5 +14,5 @@ conda activate new_environment_1
 - `term_sets/` - includes all the term sets we are currently leveraging and words we discovered using unsupervised learning methods. 
 - **I couldn't push the data to the repo due to security reasons, but a lot of my argparse functions refer to the file paths I stored it in on my local drive. I had an `original_data` folder, as well as a `cleaned_data` folder for my data.
 
-### Learn more about HEAL's mission at their [website](https://heal.nih.gov/about)
+### Learn more about HEAL's mission at their [website:](https://heal.nih.gov/about)
 ![Helping End Addiction Long Term](project_info/HEAL.png)
