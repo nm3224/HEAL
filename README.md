@@ -1,5 +1,6 @@
 # Automating HEAL Grant Data Characteristics using NLP/ML
 - HEAL seeks to improve both pain management and prevention tactics for opioid use disorder.
+- We use supervised machine learning and natural language processing methods to help automate HEAL grant categorization. 
 - Automating classification of HEAL awards for portfolio analysis will:
   - Significantly reduce the time burden of portfolio analysts within HEAL.
   - Highlight research themes, connect investigators studying aligned targets and interventions and determine promising areas for allocating research support.
