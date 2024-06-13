@@ -10,7 +10,7 @@ Set up and activate the conda environment by running the following lines:
 conda env create -f new_environment_1.yml
 conda activate new_environment_1
 ```
-### Structure of repo
+### Structure of Repo:
 
 - `RCDC` - includes all RCDC files of term sets we used from them.
 - `project_info` - includes slide deck of the project. 
